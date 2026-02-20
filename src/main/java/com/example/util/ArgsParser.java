@@ -10,7 +10,7 @@ import com.example.exception.CommandLineArgsException;
 
 public class ArgsParser {
 
-    private record Config (
+    public record Config (
         List<Path> inputPaths,
         Path outputPath,
         String prefix,
@@ -78,6 +78,9 @@ public class ArgsParser {
         }
         if (fullStats == null) {
             fullStats = false;
+        }
+        if (inputPaths.size() == 0) {
+            throw new CommandLineArgsException("Missing input files");
         }
         return new Config(inputPaths, outputPath, prefix, fullStats, addMode);
     }
