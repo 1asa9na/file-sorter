@@ -44,6 +44,8 @@ public class App {
             } catch (LineWritingException e) {
                 System.err.println("Error occured while writing lines into file");
                 System.err.println(e.getMessage());
+            } catch (RuntimeException e) {
+                System.err.println(e.getMessage());
             }
         }
         outputService.closeWriters();
