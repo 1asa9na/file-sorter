@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class IntegerStats implements Stats {
 
@@ -19,10 +20,10 @@ public class IntegerStats implements Stats {
     }
 
     @Override
-    public Map<String, String> get(boolean isFull) {
+    public Optional<Map<String, String>> get(boolean isFull) {
         int size = values.size();
         if (size == 0) {
-            return null;
+            return Optional.empty();
         }
         Map<String, String> map = new HashMap<>();
         if (isFull) {
@@ -41,7 +42,7 @@ public class IntegerStats implements Stats {
             map.put("Average of values", String.valueOf(sumBigDecimal.divide(BigDecimal.valueOf(size), 10, RoundingMode.HALF_UP)));
         }
         map.put("Count of values", String.valueOf(size));
-        return map;
+        return Optional.of(map);
     }
     
 }

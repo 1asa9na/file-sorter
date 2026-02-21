@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class StringStats implements Stats {
 
@@ -15,10 +16,10 @@ public class StringStats implements Stats {
     }
 
     @Override
-    public Map<String, String> get(boolean isFull) {
+    public Optional<Map<String, String>> get(boolean isFull) {
         int size = values.size();
         if (size == 0) {
-            return null;
+            return Optional.empty();
         }
         Map<String, String> map = new HashMap<>();
         if (isFull) {
@@ -33,7 +34,7 @@ public class StringStats implements Stats {
             map.put("Max Length", maxLength.toString());
         }
         map.put("Count of values", String.valueOf(size));
-        return map;
+        return Optional.of(map);
     }
     
 }

@@ -50,11 +50,17 @@ public class App {
         }
         outputService.closeWriters();
         for (DataType type : DataType.values()) {
-            System.out.println("Stats for " + type);
             StatsSingletone.getInstance().getStats(type).get(config.fullStats())
-            .entrySet()
-            .stream()
-            .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue()));
+            .ifPresentOrElse(
+                map -> {
+                    System.out.println("Stats for " + type);
+                    map.entrySet()
+                    .stream()
+                    .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue()));
+                },
+                () -> System.out.println("Stats for " + type + " is empty")
+            );
+            
             System.out.println();
         }
     }
